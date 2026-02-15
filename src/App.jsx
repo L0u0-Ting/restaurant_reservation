@@ -12,7 +12,7 @@ import { LanguageProvider } from './context/LanguageContext';
 function App() {
   return (
     <LanguageProvider>
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <CartProvider>
           <div className="app">
             <Header />

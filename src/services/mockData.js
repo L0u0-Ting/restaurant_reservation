@@ -1,3 +1,5 @@
+import chickenImg from '../assets/chicken-cutlet.png';
+
 export const menuItems = [
   {
     id: 1,
@@ -12,7 +14,7 @@ export const menuItems = [
       jp: "外はサクサク、中はジューシー。秘伝のタレで味付けしました。"
     },
     price: 85,
-    image: "https://api.dicebear.com/9.x/icons/svg?seed=chicken&backgroundColor=ffdfbf"
+    image: chickenImg
   },
   {
     id: 2,
