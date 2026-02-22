@@ -13,6 +13,11 @@ export const menuItems = [
       en: "Crispy outside, tender inside. Exclusive marinade recipe.",
       jp: "外はサクサク、中はジューシー。秘伝のタレで味付けしました。"
     },
+    category: {
+      zh: "小吃",
+      en: "Snacks",
+      jp: "スナック"
+    },
     price: 85,
     image: chickenImg
   },
@@ -28,6 +33,11 @@ export const menuItems = [
       en: "Rich broth, chewy noodles, a heartwarming choice.",
       jp: "濃厚なスープ、コシのある麺、心温まる一杯。"
     },
+    category: {
+      zh: "主食",
+      en: "Main Course",
+      jp: "メインコース"
+    },
     price: 180,
     image: "https://api.dicebear.com/9.x/icons/svg?seed=ramen&backgroundColor=b6e3f4"
   },
@@ -42,6 +52,11 @@ export const menuItems = [
       zh: "滿滿鳳梨與火腿，酸甜好滋味。",
       en: "Loaded with pineapple and ham, sweet and sour flavor.",
       jp: "パイナップルとハムがたっぷり、甘酸っぱい味わい。"
+    },
+    category: {
+      zh: "主食",
+      en: "Main Course",
+      jp: "メインコース"
     },
     price: 250,
     image: "https://api.dicebear.com/9.x/icons/svg?seed=pizza&backgroundColor=c0eb75"

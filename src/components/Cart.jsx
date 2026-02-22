@@ -1,22 +1,50 @@
+/**
+ * ==============================
+ * Imports
+ * ==============================
+ */
 import React from 'react';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useNavigate } from 'react-router-dom';
+import ScrollableQuantity from './ScrollableQuantity';
 
+/**
+ * ==============================
+ * Component: Cart
+ * Description: Displays the items in the shopping cart and allows modification.
+ * Features:
+ * - List of selected items with quantity controls
+ * - Total price
+ * - Proceed to checkout
+ * ==============================
+ */
 const Cart = () => {
-    const { cartItems, removeFromCart, addToCart, totalPrice } = useCart();
+    /**
+     * ==============================
+     * Hooks & State
+     * ==============================
+     */
+    const { cartItems, removeFromCart, deleteFromCart, addToCart, totalPrice, clearCart, updateCartItemQuantity } = useCart();
     const { t, language } = useLanguage();
     const navigate = useNavigate();
 
+    /**
+     * ==============================
+     * Render
+     * ==============================
+     */
+    // -- Empty State --
     if (cartItems.length === 0) {
         return (
             <div className="cart-empty">
                 <h2>{t('cartEmpty')}</h2>
-                <button onClick={() => navigate('/')}>{t('backToMenu')}</button>
+                <button onClick={() => navigate('/menu')}>{t('backToMenu')}</button>
             </div>
         );
     }
 
+    // -- Cart List --
     return (
         <div className="cart-container">
             <h2>{t('cartList')}</h2>
@@ -27,11 +55,22 @@ const Cart = () => {
                             <h3>{item.name[language]}</h3>
                             <p>{t('currency')} {item.price}</p>
                         </div>
-                        <div className="item-quantity">
+                        <div className="item-quantity" style={{ display: 'flex', alignItems: 'center' }}>
                             <button
                                 onClick={() => removeFromCart(item.id)}
                             >-</button>
-                            <span>{item.quantity}</span>
+                            <ScrollableQuantity
+                                quantity={item.quantity}
+                                setQuantity={(newQty) => {
+                                    if (newQty === 0) {
+                                        deleteFromCart(item.id);
+                                    } else {
+                                        updateCartItemQuantity(item.id, newQty);
+                                    }
+                                }}
+                                min={0}
+                                max={99}
+                            />
                             <button onClick={() => addToCart(item)}>+</button>
                         </div>
                         <div className="item-subtotal">
@@ -40,14 +79,23 @@ const Cart = () => {
                     </div>
                 ))}
             </div>
+
+            {/* Cart Summary & Actions */}
             <div className="cart-summary">
                 <h3>{t('total')}: {t('currency')} {totalPrice}</h3>
-                <button className="checkout-btn" onClick={() => navigate('/checkout')}>
-                    {t('checkout')}
-                </button>
-                <button className="back-btn" onClick={() => navigate('/')}>
-                    {t('continueOrdering')}
-                </button>
+                <div className="cart-actions-group" style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
+                    <button className="checkout-btn" onClick={() => navigate('/checkout')}>
+                        {t('checkout')}
+                    </button>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                        <button className="back-btn" onClick={() => navigate('/menu')} style={{ flex: 1 }}>
+                            {t('continueOrdering')}
+                        </button>
+                        <button className="clear-cart-btn" onClick={clearCart} style={{ flex: 1, backgroundColor: '#ff4d4f', color: 'white', padding: '12px 20px', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
+                            {t('clearCart')}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     );
