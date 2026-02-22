@@ -1,5 +1,5 @@
-import chickenImg from '../assets/chicken-cutlet.png';
-
+// Temporary placeholder image for fallback data
+const fallbackImg = "https://api.dicebear.com/9.x/icons/svg?seed=chicken&backgroundColor=fcd34d";
 export const menuItems = [
   {
     id: 1,
@@ -19,7 +19,7 @@ export const menuItems = [
       jp: "スナック"
     },
     price: 85,
-    image: chickenImg
+    image: fallbackImg
   },
   {
     id: 2,
